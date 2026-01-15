@@ -1,44 +1,26 @@
-// gallery.js
-
-const galleryImages = [
-    "images/street/1.jpg",
-    "images/street/2.jpg",
-    "images/street/3.jpg",
-    "images/street/4.jpg",
-    "images/street/5.jpg",
-    "images/street/6.jpg",
-    "images/street/7.jpg",
-    "images/street/8.jpg",
-    "images/street/9.jpg",
-    "images/street/10.jpg",
-    "images/street/11.jpg",
-    "images/street/13.jpg",
-    "images/street/14.jpg",
-    "images/street/15.jpg",
-    "images/street/16.jpg",
-    "images/street/17.jpg",
-    "images/street/18.jpg",
-    "images/street/19.jpg",
-    "images/street/20.jpg"
-];
 
 
-function generateGallery() {
-    const container = document.getElementById('gallery-container');
+function generateGallery(containerId, folder, totalImages) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    galleryImages.forEach(src => {
+    for (let i = 1; i <= totalImages; i++) {
+        const thumb = `images/${folder}/thumbs/${i}.webp`;
+        const full = `images/${folder}/full/${i}.jpg`;
+
         const img = document.createElement('img');
-        img.src = src;
-        img.alt = "Gallery Image";
-        img.className = "w-full mb-4 rounded-lg break-inside cursor-pointer transition-transform duration-300 hover:scale-105";
+        img.src = thumb;
+        img.dataset.full = full;
+        img.alt = `${folder} image`;
         img.loading = "lazy";
+        img.className =
+            "w-full mb-4 rounded-lg break-inside cursor-pointer transition-transform duration-300 hover:scale-105";
 
-        // Add click listener for modal
-        img.addEventListener('click', () => openModal(src));
-
+        img.addEventListener('click', () => openModal(full));
         container.appendChild(img);
-    });
+    }
 }
+
 
 // Modal creation
 function createModal() {
@@ -68,5 +50,10 @@ function openModal(src) {
 
 document.addEventListener('DOMContentLoaded', () => {
     createModal();
-    generateGallery();
+
+    generateGallery('gallery-portrait', 'portrait', 15);
+    generateGallery('gallery-development', 'development', 12);
+    generateGallery('gallery-documentary', 'documentary', 4);
+    generateGallery('gallery-travel', 'street', 19);
 });
+
