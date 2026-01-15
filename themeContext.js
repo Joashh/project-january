@@ -9,11 +9,9 @@ function initializeTheme() {
   
   if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
     html.setAttribute('data-theme', 'dark');
-    html.classList.add('dark');
     localStorage.setItem('theme', 'dark');
   } else {
     html.setAttribute('data-theme', 'light');
-    html.classList.remove('dark');
     localStorage.setItem('theme', 'light');
   }
 }
@@ -21,16 +19,15 @@ function initializeTheme() {
 // Initialize theme when page loads
 initializeTheme();
 
+// Toggle theme on button click
 toggle.addEventListener('click', () => {
   const currentTheme = html.getAttribute('data-theme');
   
   if (currentTheme === 'dark') {
     html.setAttribute('data-theme', 'light');
-    html.classList.remove('dark');
     localStorage.setItem('theme', 'light');
   } else {
     html.setAttribute('data-theme', 'dark');
-    html.classList.add('dark');
     localStorage.setItem('theme', 'dark');
   }
 });
@@ -40,10 +37,8 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   if (!localStorage.getItem('theme')) { // Only if user hasn't set preference
     if (e.matches) {
       html.setAttribute('data-theme', 'dark');
-      html.classList.add('dark');
     } else {
       html.setAttribute('data-theme', 'light');
-      html.classList.remove('dark');
     }
   }
 });
