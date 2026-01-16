@@ -42,11 +42,36 @@ function createModal() {
 }
 
 function openModal(src) {
-    const modal = document.getElementById('image-modal');
-    const modalImg = document.getElementById('modal-img');
-    modalImg.src = src;
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-img');
+
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Draw image
+    ctx.drawImage(img, 0, 0);
+
+    // Draw watermark
+    ctx.font = `${canvas.width / 15}px Arial`;
+    ctx.fillStyle = "rgba(255,255,255,0.2)";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.rotate(-Math.PI / 6);
+    ctx.fillText("© Al Benavente", canvas.width / 2, canvas.height / 1);
+
+    modalImg.src = canvas.toDataURL("image/jpeg", 0.9);
     modal.classList.remove('hidden');
+  };
+
+  img.src = src;
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     createModal();
@@ -56,4 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
     generateGallery('gallery-documentary', 'documentary', 4);
     generateGallery('gallery-travel', 'street', 19);
 });
+document.addEventListener('dragstart', (e) => {
+  if (e.target.tagName === 'IMG') {
+    e.preventDefault();
+  }
+});
+document.addEventListener('contextmenu', (e) => {
+  if (e.target.tagName === 'IMG') {
+    e.preventDefault();
+  }
+});
+
 
