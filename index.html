@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -24,8 +24,7 @@
     <button id="themeToggle"
         class="fixed bottom-6 right-6 bg-gray-100 border border-gray-300 dark:border-gray-900 cursor-pointer dark:bg-gray-800 text-gray-700 dark:text-white p-2 rounded-full shadow-lg hover:scale-105 transition-transform">
         <!-- Sun icon (shown in light mode) -->
-        <svg id="sunIcon" class="size-6" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
+        <svg id="sunIcon" class="size-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
                 d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
                 clip-rule="evenodd"></path>
@@ -138,8 +137,12 @@
 
 
     <section id="section2"
-        class="w-full flex items-center bg-gray-900 dark:bg-black transition-colors duration-500 px-6 md:px-20 py-[10vh]"
-        style="background-image: url('images/bgpat2.png');">
+        class=" w-full flex items-center bg-gray-900 dark:bg-black transition-colors duration-500 px-6 md:px-20 py-[10vh]"
+        style="
+        background-image: url('images/bgpat2.png'); 
+        box-shadow: 0 10px 15px rgba(0,0,0,0.6); 
+        position: relative; 
+        z-index: 10;">
 
         <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16 w-full max-w-7xl mx-auto">
             <!-- Image Column -->
@@ -252,12 +255,16 @@
 
     <footer
         class="dark:bg-gray-900 w-full bg-white  dark:text-white text-black p-4 font-light flex flex-col justify-center items-center">
-        <h1 class="font-medium text-center">Al Benavente | Photographer | <span>Copyright &copy; <span id="year"></span> </span></h1>
-        <h1 class="py-2 text-xs text-center">“Famous photographers are remembered not just for images, but for the
-            courage to keep seeing and capturing what others overlook.”</h1>
-        <h1 class="text-xs leading-1">alBenavente.creative@gmail.com</h1>
+        <h1 class="font-medium text-center">Al Benavente | Photographer</h1>
 
-        <div class="flex gap-4 p-4">
+        <div class="flex flex-col items-center justify-center py-2">
+            <h1 class="pb-2 text-xs text-center">“Famous photographers are remembered not just for images, but for the
+                courage to keep seeing and capturing what others overlook.”</h1>
+            <h1 class="text-xs leading-1">alBenavente.creative@gmail.com</h1>
+        </div>
+
+
+        <div class="flex gap-4 py-2">
             <a href="https://instagram.com" target="_blank" class="dark:text-white text-gray-600 hover:text-pink-500 transition-colors duration-200
                           text-xl">
                 <i class="fab fa-instagram"></i>
@@ -274,7 +281,16 @@
                           text-xl">
                 <i class="fab fa-linkedin"></i>
             </a>
+
+
         </div>
+
+
+        <h1 class="text-xs font-medium text-gray-500">
+            <span>Copyright &copy; <span id="year"></span> </span>
+        </h1>
+
+
     </footer>
 
     <script src="wallpaperanimation.js"></script>

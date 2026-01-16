@@ -2,19 +2,18 @@ const text = "I am a Photographer";
 const element = document.getElementById("typewriter");
 let i = 0;
 let cursorVisible = true;
+let hasTyped = false; // Ensure it runs only once
 
-// Add cursor blinking
+// Cursor blinking
 function blinkCursor() {
-    const cursor = document.querySelector('.typewriter-cursor');
+    const cursor = element.querySelector('.typewriter-cursor');
     if (cursor) {
         cursorVisible = !cursorVisible;
         cursor.style.opacity = cursorVisible ? '1' : '0';
     }
 }
 
-// Start cursor blinking
-const cursorInterval = setInterval(blinkCursor, 530); // Standard cursor blink speed
-
+// Typewriter function
 function typeWriter() {
     if (i < text.length) {
         // Remove any existing cursor
@@ -33,20 +32,23 @@ function typeWriter() {
         element.appendChild(cursorSpan);
         
         i++;
-        setTimeout(typeWriter, 100); // Adjust typing speed
+        setTimeout(typeWriter, 100); // typing speed
     } else {
-        // When typing is complete, ensure cursor keeps blinking
-        // Clear the interval and restart it for consistent blinking
-        clearInterval(cursorInterval);
+        // Keep cursor blinking after typing
         setInterval(blinkCursor, 530);
     }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Clear element and start typing
-    if (element) {
-        element.innerHTML = '';
-        typeWriter();
-    }
-});
+// Intersection Observer to detect when element enters viewport
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !hasTyped) {
+            hasTyped = true;       // prevent multiple triggers
+            element.innerHTML = ''; // clear content
+            typeWriter();           // start typing
+           
+        }
+    });
+}, { threshold: 0.5 }); // 50% of element visible
+
+if (element) observer.observe(element);
