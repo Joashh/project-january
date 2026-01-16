@@ -38,6 +38,7 @@ function animateOnScroll() {
 
     galleryImages.forEach(img => observer.observe(img));
 }
+
 function createModal() {
     const modal = document.createElement('div');
     modal.id = 'image-modal';
@@ -47,17 +48,24 @@ function createModal() {
     `;
     modal.innerHTML = `
         <span id="modal-close" class="absolute top-5 right-5 text-white text-3xl cursor-pointer">&times;</span>
-        <img id="modal-img" class="max-h-[90vh] max-w-[90vw] rounded-lg shadow-lg" src="" alt="Modal Image">
+        <div id="modal-loader" class="flex items-center justify-center space-x-2">
+    <span class="dot bg-white w-3 h-3 rounded-full animate-bounce-delay"></span>
+    <span class="dot bg-white w-3 h-3 rounded-full animate-bounce-delay"></span>
+    <span class="dot bg-white w-3 h-3 rounded-full animate-bounce-delay"></span>
+</div>
+        <img id="modal-img" class="max-h-[90vh] max-w-[90vw] rounded-lg shadow-lg hidden" src="" alt="Modal Image">
     `;
     document.body.appendChild(modal);
 
-    // Close modal on click
     modal.addEventListener('click', (e) => {
         if (e.target.id === 'modal-close' || e.target.id === 'image-modal') {
-            // Fade out background
             modal.classList.remove('opacity-100');
             modal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300); // hide after fade
+            setTimeout(() => modal.classList.add('hidden'), 300);
+
+            // Reset modal for next open
+            document.getElementById('modal-img').classList.add('hidden');
+            document.getElementById('modal-loader').classList.remove('hidden');
         }
     });
 }
@@ -65,6 +73,12 @@ function createModal() {
 function openModal(src) {
     const modal = document.getElementById('image-modal');
     const modalImg = document.getElementById('modal-img');
+    const loader = document.getElementById('modal-loader');
+
+    // Step 1: show modal immediately
+    modal.classList.remove('hidden');
+    void modal.offsetWidth; // force reflow
+    modal.classList.add('opacity-100');
 
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -74,8 +88,6 @@ function openModal(src) {
 
         canvas.width = img.width;
         canvas.height = img.height;
-
-        // Draw image
         ctx.drawImage(img, 0, 0);
 
         // Draw watermark
@@ -86,16 +98,10 @@ function openModal(src) {
         ctx.rotate(-Math.PI / 6);
         ctx.fillText("© Al Benavente", canvas.width / 2, canvas.height / 1);
 
+        // Step 2: hide loader, show image
+        loader.classList.add('hidden');
         modalImg.src = canvas.toDataURL("image/jpeg", 0.9);
-
-        // Step 1: remove hidden
-        modal.classList.remove('hidden');
-
-        // Step 2: force reflow so the browser registers the opacity-0 state
-        void modal.offsetWidth; // this forces a reflow
-
-        // Step 3: then add opacity-100 to trigger transition
-        modal.classList.add('opacity-100');
+        modalImg.classList.remove('hidden');
     };
 
     img.src = src;
@@ -110,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     generateGallery('gallery-development', 'development', 12);
     generateGallery('gallery-documentary', 'documentary', 4);
     generateGallery('gallery-travel', 'street', 19);
-     animateOnScroll();
+    animateOnScroll();
 });
 document.addEventListener('dragstart', (e) => {
     if (e.target.tagName === 'IMG') {
