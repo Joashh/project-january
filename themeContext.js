@@ -30,6 +30,8 @@ toggle.addEventListener('click', () => {
     html.setAttribute('data-theme', 'dark');
     localStorage.setItem('theme', 'dark');
   }
+
+  if (window.updateBgByTheme) updateBgByTheme();
 });
 
 // Listen for system theme changes
