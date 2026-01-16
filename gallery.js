@@ -6,7 +6,7 @@ function generateGallery(containerId, folder, totalImages) {
 
     for (let i = 1; i <= totalImages; i++) {
         const thumb = `images/${folder}/thumbs/${i}.webp`;
-        const full = `images/${folder}/full/${i}.jpg`;
+        const full = `images/${folder}/watermarked/${i}.jpg`;
 
         const img = document.createElement('img');
         img.src = thumb;
