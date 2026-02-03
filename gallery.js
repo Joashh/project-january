@@ -24,7 +24,7 @@ function generateGallery(containerId, folder, totalImages) {
 
 
 function animateOnScroll() {
-    const galleryImages = document.querySelectorAll('#gallery-portrait img, #gallery-development img, #gallery-documentary img, #gallery-travel img');
+    const galleryImages = document.querySelectorAll('#gallery-portrait img, #gallery-development img, #gallery-travel img, #gallery-street img');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -112,10 +112,11 @@ function openModal(src) {
 document.addEventListener('DOMContentLoaded', () => {
     createModal();
 
-    generateGallery('gallery-portrait', 'portrait', 15);
-    generateGallery('gallery-development', 'development', 12);
-    generateGallery('gallery-documentary', 'documentary', 4);
-    generateGallery('gallery-travel', 'street', 19);
+    generateGallery('gallery-portrait', 'portrait', 19);
+    generateGallery('gallery-development', 'development', 17);
+    //generateGallery('gallery-documentary', 'documentary', 4);
+    generateGallery('gallery-travel', 'travel', 22);
+    generateGallery('gallery-street', 'street', 18);
     animateOnScroll();
 });
 document.addEventListener('dragstart', (e) => {

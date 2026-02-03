@@ -1,11 +1,14 @@
 const wallpaperDiv = document.getElementById('wallpaper-bg');
-
+wallpaperDiv.addEventListener('contextmenu', e => {
+  e.preventDefault();
+});
 const wallpapers = [
   'images/wallpaper/webp/1.webp',
   'images/wallpaper/webp/2.webp',
-  'images/wallpaper/webp/3.webp',
   'images/wallpaper/webp/4.webp',
-  'images/wallpaper/webp/5.webp'
+  'images/wallpaper/webp/5.webp',
+  'images/wallpaper/webp/6.webp',
+  
 ];
 
 let current = 1;

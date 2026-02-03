@@ -39,6 +39,8 @@ function typeWriter() {
     }
 }
 
+
+
 // Intersection Observer to detect when element enters viewport
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -49,6 +51,6 @@ const observer = new IntersectionObserver((entries) => {
            
         }
     });
-}, { threshold: 0.5 }); // 50% of element visible
+}, { threshold: 0.5 }); 
 
 if (element) observer.observe(element);

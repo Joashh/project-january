@@ -2,8 +2,8 @@ const fs = require('fs');
 const sharp = require('sharp');
 const path = require('path');
 
-const inputDir = './images/street/full';
-const outputDir = './images/street/watermarked';
+const inputDir = './images/documentary/sakada';
+const outputDir = './images/documentary/sakada/watermarked';
 
 if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
 
